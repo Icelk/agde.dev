@@ -344,7 +344,7 @@ const lf = localforage.createInstance({ name: "agde" })
  */
 async function get_document(document) {
     let doc = await lf.getItem(`current/${document}`)
-    return doc?.data ?? null
+    return doc?.data ?? new Uint8Array()
 }
 /**
  * @param document {string}
