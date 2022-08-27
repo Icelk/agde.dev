@@ -490,8 +490,7 @@ worker.addEventListener("message", (msg) => {
         disconnected = true
     }
 })
-let ws_url = `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/agde-ws`
-let caret_ws_url = `${ws_url}-carets`
+let ws_url = `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/demo/ws`
 init(ws_url, "warn")
 ;(async () => {
     let td = new TextDecoder()
