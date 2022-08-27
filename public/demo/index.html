@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="node_modules/localforage/dist/localforage.js"></script>
+        <script src="writing.js" defer></script>
+        <link rel="stylesheet" href="writing.css" />
+    </head>
+    <body>
+        <div id="main-pane">
+            <div id="buttons">
+                <div>
+                    <button data-heading="div">T</button>
+                    <button data-heading="h1">H1</button>
+                    <button data-heading="h2">H2</button>
+                    <button data-heading="h3">H3</button>
+                    <button data-exec="bold">B</button>
+                    <button data-exec="italic">I</button>
+                    <button data-exec="underline" class="underline">U</button>
+                </div>
+                <div>
+                    <button id="logout">Log out</button>
+                </div>
+            </div>
+            <div id="caret-container"></div>
+            <div id="input" contenteditable></div>
+        </div>
+    </body>
+</html>

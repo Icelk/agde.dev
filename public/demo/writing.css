@@ -1,0 +1,39 @@
+#main-pane {
+    max-width: 90ch;
+    margin-left: auto;
+    margin-right: auto;
+}
+#input {
+    margin-top: 1rem;
+    white-space: pre-wrap;
+    min-height: 30rem;
+    box-shadow: 0 5px 10px 3px #7f7f7f3f;
+    outline: none;
+    padding: 0.5rem;
+}
+#buttons {
+    display: flex;
+    justify-content: space-between;
+}
+#buttons button {
+    font-size: 0.9rem;
+    padding: 0.3em 0.6em;
+    background-color: #9f9f9f4f;
+    border: none;
+    border-radius: 0.2em;
+    cursor: pointer;
+    margin: 0 0.2rem;
+}
+#buttons button.active {
+    background-color: #6f6f6f6f;
+}
+.underline {
+    text-decoration: underline;
+}
+
+span.caret {
+    opacity: 0.8;
+    position: absolute;
+    pointer-events: none;
+    border-radius: 2px;
+}
