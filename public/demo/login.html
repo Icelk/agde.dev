@@ -23,7 +23,7 @@
                 let p = password.value
                 let response = await fetch("/demo/auth", { method: "PUT", body: `${u.length}\n${u}${p}` })
                 if (response.status === 200) {
-                    location.reload()
+                    location = "/demo/"
                 } else {
                     login.innerText = "Invalid credentials. Try again..."
                 }
