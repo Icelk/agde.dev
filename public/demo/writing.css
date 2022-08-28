@@ -10,6 +10,7 @@
     box-shadow: 0 5px 10px 3px #7f7f7f3f;
     outline: none;
     padding: 0.5rem;
+    border-radius: 0.3rem;
 }
 #buttons {
     display: flex;
