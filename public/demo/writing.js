@@ -65,7 +65,7 @@ function node_from_index(base_elem, index) {
         } else if (node.nodeType === Node.ELEMENT_NODE) {
             let end_length = 3 + node.tagName.length
             curr += node.outerHTML.length - node.innerHTML.length - end_length
-            if (curr + node.innerHTML.length > index) {
+            if (curr + node.innerHTML.length >= index) {
                 let curr_before_recurse = curr
                 // continue recursion
                 node.childNodes.forEach((node) => recurse_children(node))
