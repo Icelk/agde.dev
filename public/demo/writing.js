@@ -450,6 +450,7 @@ worker.addEventListener("message", (msg) => {
             console.warn("Tried to get the UUID after disconnection.")
         } else {
             uuid = msg.data.uuid
+            commit_and_send()
         }
     }
     if (msg.data.action === "user_data") {
