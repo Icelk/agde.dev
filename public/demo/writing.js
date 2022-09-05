@@ -429,6 +429,9 @@ async function commit_and_send() {
         update_all_carets()
     }
 }
+function shutdown() {
+    worker.postMessage({ action: "shutdown" })
+}
 /**
  * @param s{string}
  */
@@ -443,6 +446,9 @@ function send(s) {
 //======
 
 let disconnected = false
+let manual = false
+
+let manual_button = document.getElementById("manual")
 
 worker.addEventListener("message", (msg) => {
     if (msg.data.uuid !== undefined) {
@@ -492,7 +498,7 @@ worker.addEventListener("message", (msg) => {
     }
 })
 let ws_url = `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/demo/ws`
-init(ws_url, "warn")
+init(ws_url, localStorage.getItem("agde-info-level") ?? "warn")
 ;(async () => {
     let td = new TextDecoder()
     let doc = await get_document("default")
@@ -523,7 +529,7 @@ setTimeout(async () => {
     let last_changed = false
     while (true) {
         await delay(2)
-        if (disconnected) {
+        if (disconnected || manual) {
             break
         }
         if (changed && !last_changed) {
@@ -542,6 +548,26 @@ setTimeout(async () => {
         send_pos()
     }
 }, 2000)
+manual_button.addEventListener("click", async () => {
+    if (!manual) {
+        manual = true
+        manual_button.innerText = "Send changes"
+    } else {
+        manual_button.disabled = true
+        await commit_and_send()
+        manual_button.disabled = false
+    }
+})
+document.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter" && e.ctrlKey) {
+        if (manual) {
+            e.preventDefault()
+            manual_button.disabled = true
+            await commit_and_send()
+            manual_button.disabled = false
+        }
+    }
+})
 
 window.addEventListener("beforeunload", (_) => {
     worker.postMessage({ action: "shutdown" })
