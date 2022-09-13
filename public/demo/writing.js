@@ -498,7 +498,7 @@ worker.addEventListener("message", (msg) => {
     }
 })
 let ws_url = `${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/demo/ws`
-init(ws_url, localStorage.getItem("agde-info-level") ?? "warn")
+init(ws_url, localStorage.getItem("agde-log-level") ?? "warn")
 ;(async () => {
     let td = new TextDecoder()
     let doc = await get_document("default")
