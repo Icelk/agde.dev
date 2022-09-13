@@ -361,7 +361,7 @@ async function put_document(document, data) {
 async function commit_and_send() {
     let te = new TextEncoder()
     if (changed) {
-        await put_document("default", te.encode(base_elem.innerHTML))
+        await put_document("default", te.encode(base_elem.innerHTML.trim()))
     }
     let sel = document.getSelection()
     let idx = []
@@ -392,7 +392,7 @@ async function commit_and_send() {
     let td = new TextDecoder()
     let t = td.decode(d)
     // don't replace when unnecessary
-    if (base_elem.innerHTML !== t) {
+    if (base_elem.innerHTML.trim() !== t.trim()) {
         let sel = document.getSelection()
         let new_idx = idx
         if (sel.rangeCount !== 0) {
@@ -401,7 +401,7 @@ async function commit_and_send() {
             new_idx = [index_from_node(r.startContainer, r.startOffset), index_from_node(r.endContainer, r.endOffset)]
         }
 
-        base_elem.innerHTML = t
+        base_elem.innerHTML = t.trim()
 
         if (new_idx[0] !== undefined && new_idx[1] !== undefined) {
             let c1, c2
@@ -503,7 +503,7 @@ init(ws_url, localStorage.getItem("agde-log-level") ?? "warn")
     let td = new TextDecoder()
     let doc = await get_document("default")
     if (doc !== null) {
-        base_elem.innerHTML = td.decode(doc)
+        base_elem.innerHTML = td.decode(doc).trim()
     }
 })()
 
