@@ -91,7 +91,9 @@ function node_from_index(base_elem, index) {
     if (selected === null) {
         if (index > curr) {
             let node = last_text_node(base_elem)
-            selected = { node, offset: node.textContent.length }
+            if (node !== null) {
+                selected = { node, offset: node.textContent.length }
+            }
         }
         if (selected === null) {
             selected = { node: base_elem, offset: 0 }

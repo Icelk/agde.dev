@@ -1,0 +1,35 @@
+(
+    extensions: {
+        "agde": [
+            // Custom("Agde", ()),
+            Redirect(Exact("/index.html"), "https://github.com/Icelk/agde"),
+            Auth (
+                credentials: SpaceSepparatedAccoutPerLine("agde.passwd"),
+                secret: "agde.secret",
+                auth_api_route: "/demo/auth",
+                unauthorized_route: "/demo/login.",
+                filter: StartsWith("/demo/"),
+            ),
+            Csp({
+                "/demo/worker.js": FromDefault({ script_src: [UnsafeEval], connect_src: [Scheme("wss:"), Scheme("ws:")] }),
+                "/demo/login.html": FromDefault({ script_src: [UnsafeInline] }),
+            })
+        ]
+    },
+    hosts: [
+        Plain (
+            cert: "cert.pem",
+            pk: "pk.pem",
+            path: "./",
+            extensions: ["base", "agde"],
+            name_override: Some("agde.dev"),
+            options: (
+                disable_client_cache: true,
+                disable_server_cache: true,
+            ),
+        ),
+    ],
+    host_collections: {
+        "s": ["agde.dev"]
+    }
+)
