@@ -22,11 +22,16 @@
             pk: "pk.pem",
             path: "./",
             extensions: ["base", "agde"],
-            name_override: Some("agde.dev"),
+            name: Some("agde.dev"),
             options: (
                 disable_client_cache: true,
                 disable_server_cache: true,
             ),
+            addons: [
+                AutomaticCertificate (
+                    contact: "mailto:main@icelk.dev",
+                ),
+            ],
         ),
     ],
     host_collections: {
